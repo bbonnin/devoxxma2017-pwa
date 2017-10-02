@@ -1,32 +1,37 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="http://chat.vuejs.org/" target="_blank" rel="noopener">Vue Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <!--img :src="imgUrl" width="80%"-->
+    <div class="chart" v-html="chart"></div>
   </div>
 </template>
 
 <script>
+/* eslint prefer-template: 0 */
+
+const QUERY_URL = 'http://localhost:3000/export?t=Browsers&v=52.81|14.44|8.75|6.67|7.86&k=Chrome|Safari|UC Browser|Firefox|Others';
+
 export default {
   name: 'hello',
+
   data() {
     return {
       msg: 'Welcome to Your Vue.js PWA',
+      chart: '',
+      imgUrl: QUERY_URL + '&f=png',
     };
   },
+
+  mounted() {
+    this.$http.get(QUERY_URL + '&f=svg')
+      .then((resp) => {
+        console.log(resp.body);
+        this.chart = resp.body;
+      }, (resp) => {
+        console.log(resp);
+      });
+  },
+
 };
 </script>
 
@@ -49,4 +54,16 @@ li {
 a {
   color: #35495E;
 }
+
+.chart {
+  margin: auto;
+  display: block;
+  width: 90%;
+  height: 550px;
+}
+
+/*svg g {
+  transform: translateX(100px);
+  transform-origin: 100px 100px 100px;
+}*/
 </style>
