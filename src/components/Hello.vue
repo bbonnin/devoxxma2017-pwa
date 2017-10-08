@@ -2,7 +2,12 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <!--img :src="imgUrl" width="80%"-->
-    <div class="chart" v-html="chart"></div>
+    <!--div class="chart" v-html="chart"></div-->
+    <div class="image-nav">
+      <span><a href="" @click.prevent="prevImg()">&lt;</a></span>
+      <img :src="imgUrl" width="200" height="200"/>
+      <span><a href="" @click.prevent="nextImg()">&gt;</a></span>
+    </div>
   </div>
 </template>
 
@@ -18,7 +23,9 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js PWA',
       chart: '',
-      imgUrl: QUERY_URL + '&f=png',
+      // imgUrl: QUERY_URL + '&f=png',
+      imgId: 1,
+      imgUrl: '/static/img/pic1.png',
     };
   },
 
@@ -30,6 +37,18 @@ export default {
       }, (resp) => {
         console.log(resp);
       });
+  },
+
+  methods: {
+    nextImg() {
+      this.imgId = (this.imgId + 1) % 5;
+      this.imgUrl = '/static/img/pic' + this.imgId + '.png';
+    },
+
+    prevImg() {
+      this.imgId = (this.imgId - 1) % 5;
+      this.imgUrl = '/static/img/pic' + this.imgId + '.png';
+    },
   },
 
 };
@@ -60,6 +79,16 @@ a {
   display: block;
   width: 90%;
   height: 550px;
+}
+
+.image-nav img {
+  vertical-align: middle;
+}
+
+.image-nav a {
+  text-decoration: none;
+  font-size: xx-large;
+  font-weight: bold;
 }
 
 /*svg g {
