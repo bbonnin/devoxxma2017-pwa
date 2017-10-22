@@ -2,8 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import VueResource from 'vue-resource';
+import Raphael from 'raphael/raphael';
+import jQuery from 'jquery';
 import App from './App';
 import router from './router';
+
+global.Raphael = Raphael;
+global.jQuery = jQuery; // Should be put in webpack config
 
 Vue.use(VueResource);
 

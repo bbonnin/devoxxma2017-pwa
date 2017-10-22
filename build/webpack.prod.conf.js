@@ -108,8 +108,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       minify: true,
       stripPrefix: 'dist/',
       runtimeCaching: [{
-        urlPattern: new RegExp('^http://localhost:5000/static/img'),
-        handler: 'networkFirst'
+        urlPattern: /^http:\/\/localhost:3000\/api/,//new RegExp('^http://localhost:3000/api'),
+        handler: 'cacheFirst'
+        //https://googlechromelabs.github.io/sw-toolbox/api.html#handlers
       }]
     })
   ]
