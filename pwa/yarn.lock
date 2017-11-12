@@ -6544,6 +6544,10 @@ void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-awesome@^2.3.3:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/vue-awesome/-/vue-awesome-2.3.4.tgz#a8b06a21dd95a5787e108561be89e216fd9a78e6"
+
 vue-hot-reload-api@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.0.tgz#9a21b35ced3634434a43ee80efb7350ea8fb206d"
@@ -6566,9 +6570,9 @@ vue-loader@^12.1.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
-vue-morris@0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/vue-morris/-/vue-morris-0.0.8.tgz#26821345ce45374b0505085850fde65d82b965ae"
+vue-morris@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/vue-morris/-/vue-morris-0.0.9.tgz#2aab40812a0b0edf06f7c95e2be632db257c729f"
   dependencies:
     babel-runtime "^6.0.0"
     jquery "2.2.4"

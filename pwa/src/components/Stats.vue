@@ -1,42 +1,48 @@
 <template>
   <div>
-    <div class="clickable-title">
-      <a @click="loadStats()">Mobile OS</a>
+    <div class="title">
+      {{ stats.name }}
     </div>
-    
-    <bar-chart
-      id="mobile-os"
-      :data="mobileOSStats"
-      xkey="year"
-      ykeys='[ "and", "ios", "win" ]'
-      labels='[ "Android", "iOS", "Windows" ]'
+    <div>
+      <button class="btn-refresh" @click.prevent="loadStats()"><icon name="refresh"></icon></button>
+    </div>
+
+    <line-chart
+      id="stats"
+      :data="stats.data"
+      :xkey="stats.key"
+      :ykeys="stats.series"
+      :labels="stats.labels"
+      :line-colors="colors"
       resize="true"
-      bar-colors='[ "#FF6384", "#36A2EB", "#FFCE56" ]'
       grid="true"
       grid-text-weight="bold">
-    </bar-chart>
+    </line-chart>
   </div>
 </template>
 
 <script>
 /* eslint prefer-template: 0 */
-import { BarChart } from 'vue-morris';
+import 'vue-awesome/icons/refresh';
+import Icon from 'vue-awesome/components/Icon';
+import { LineChart } from 'vue-morris';
 
-const QUERY_URL = 'http://localhost:3000/api/stats/os/mobile';
-// const QUERY_URL = 'https://03d9c990.ngrok.io/api/stats/os/mobile';
+const QUERY_URL = 'http://localhost:3000/api/stats/random';
+const COLORS = ['#42B8E0', '#33658A', '#F6AE2D', '#F26419', '#0E3A53'];
 
 export default {
-  name: 'hello',
+  name: 'stats',
 
   data() {
     return {
-      mobileOSStats: [],
+      stats: { data: [] },
+      colors: [],
     };
   },
 
-  components: { BarChart },
+  components: { LineChart, Icon },
 
-  mounted() {
+  beforeMount() {
     this.loadStats();
   },
 
@@ -44,7 +50,11 @@ export default {
     loadStats() {
       this.$http.get(QUERY_URL)
       .then((resp) => {
-        this.mobileOSStats = resp.body;
+        this.colors = [];
+        this.stats = resp.body;
+        for (let i = 0; i < this.stats.data.length; i += 1) {
+          this.colors.push(COLORS[i]);
+        }
       }, (resp) => {
         console.log(resp);
       });
@@ -53,10 +63,25 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.clickable-title {
+.title {
   font-size: xx-large;
+}
 
+.btn-refresh {
+  margin-top: 10px;
+  background-color: #fff;
+  font-size: 16px;
+  word-spacing: 1px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #35495E; /* #3b8070; */
+  color: #35495E; /* #3b8070; */
+  padding: 10px 30px;
+}
+
+.btn-refresh:hover {
+  color: #fff;
+  background-color: #35495E; /* #3b8070; */
 }
 </style>

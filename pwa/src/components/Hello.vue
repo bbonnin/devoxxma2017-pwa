@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
+    <img src="../assets/logo.png" alt="Vue.js PWA" width="100" height="100">
     <h1>{{ msg }}</h1>
-    
+    <router-link to="/stats" tag="button" class="btn-router">Show me statistics</router-link>
   </div>
 </template>
 
@@ -34,5 +35,22 @@ li {
 
 a {
   color: #35495E;
+}
+
+.btn-router {
+  background-color: #fff;
+  font-size: 16px;
+  word-spacing: 1px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #35495E; /* #3b8070; */
+  color: #35495E; /* #3b8070; */
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+.btn-router:hover {
+  color: #fff;
+  background-color: #35495E; /* #3b8070; */
 }
 </style>
