@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Hello from '@/components/Hello';
-// import Stats from '@/components/Stats';
-// const Stats = () => import(/* webpackChunkName: "stats" */ '@/components/Stats');
-const Stats = () => import('@/components/Stats');
+
+//import Stats from '@/components/Stats';
+const Stats = () => import(/* webpackChunkName: "stats" */ '@/components/Stats');
 
 Vue.use(Router);
 

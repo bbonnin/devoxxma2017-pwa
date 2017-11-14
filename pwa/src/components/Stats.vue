@@ -7,7 +7,11 @@
       <button class="btn-refresh" @click.prevent="loadStats()"><icon name="refresh"></icon></button>
     </div>
 
-    <line-chart
+    <div v-if="stats.data.length === 0" class="downasaur">
+      <img src="../assets/downasaur.png">
+    </div>
+
+    <line-chart v-else
       id="stats"
       :data="stats.data"
       :xkey="stats.key"
@@ -57,6 +61,8 @@ export default {
         }
       }, (resp) => {
         console.log(resp);
+        this.colors = [];
+        this.stats = { data: [] };
       });
     },
   },
@@ -83,5 +89,9 @@ export default {
 .btn-refresh:hover {
   color: #fff;
   background-color: #35495E; /* #3b8070; */
+}
+
+.downasaur {
+  margin-top: 20px;
 }
 </style>

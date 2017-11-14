@@ -33,11 +33,7 @@ function rand (limit) {
     return Math.ceil(Math.random() * limit);
 }
 
-app.get('/api/stats/os/mobile', function (req, res) {
-    res.send(MOBILE_OS_STATS);
-});
-
-app.get('/api/stats/random', function (req, res) {
+function processRandomQuery(req, res) {
     const data = [];
     const years = [];
     const series = [];
@@ -77,7 +73,17 @@ app.get('/api/stats/random', function (req, res) {
     };
 
     res.send(stats);
+}
+
+app.get('/api/stats/os/mobile', function (req, res) {
+    res.send(MOBILE_OS_STATS);
 });
+
+app.post('/api/stats/random', processRandomQuery);
+
+app.get('/api/stats/random', processRandomQuery);
+
+
 
 app.listen(3000, function () {
   console.log('API server listening on port 3000!')
